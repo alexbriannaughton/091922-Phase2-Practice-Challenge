@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -9,16 +9,20 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
+function ArmyBotCard({ bot, onAddBot, botArmy, setBotArmy, onDeleteBot }) {
 
-function BotCard({ bot, onAddBot }) {
+  function handleClick(e){
+    const updatedBotArmy = 
+    botArmy.filter((clickedBot)=>clickedBot.id!==bot.id)
+    setBotArmy(updatedBotArmy)
+  }
 
-  const [clicked, getClicked] = useState(false)
-
-  function handleClick(e) {
-    if (!clicked) {
-      getClicked(true)
-      onAddBot(bot)
-    }
+  function handleDelete(e){
+    fetch(`http://localhost:8002/bots/${bot.id}`, {
+        method: "DELETE",
+    })
+    .then((r)=>r.json())
+    .then(()=>onDeleteBot(bot))
   }
 
   return (
@@ -58,9 +62,7 @@ function BotCard({ bot, onAddBot }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={handleDelete}
               >
                 x
               </button>
@@ -72,4 +74,4 @@ function BotCard({ bot, onAddBot }) {
   );
 }
 
-export default BotCard;
+export default ArmyBotCard;
