@@ -1,7 +1,7 @@
 import React from "react";
 import BotCard from "./BotCard";
 
-function BotCollection({bots, onAddBot}) {
+function BotCollection({bots, onAddBot, onDeleteBot}) {
   // Your code here
   return (
     <div className="ui four column grid">
@@ -12,6 +12,7 @@ function BotCollection({bots, onAddBot}) {
           key={bot.id}
           bot={bot}
           onAddBot={onAddBot}
+          onDeleteBot={onDeleteBot}
           />
         ))}
       </div>

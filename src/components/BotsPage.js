@@ -34,6 +34,7 @@ function BotsPage() {
       <BotCollection
       bots={bots}
       onAddBot={handleAddBot}
+      onDeleteBot={onDeleteBot}
       />
     </div>
   )
